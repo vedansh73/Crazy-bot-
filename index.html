@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vedansh Bot | AI assistant and moderation for Discord and Telegram</title>
+<meta name="description" content="An AI assistant and smart moderator for Discord and Telegram. Answers questions, helps you learn ethical hacking, and keeps your community clean with automatic timeouts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1220;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--bg:#f8fafc;--acc:#4f46e5}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:400 16px/1.6 Inter,system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+svg{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.w{max-width:1140px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:20;background:#0b1220ee;backdrop-filter:blur(10px);border-bottom:1px solid #ffffff14}
+nav .w{display:flex;align-items:center;justify-content:space-between;height:64px}
+.lg{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+.lg svg{width:24px;height:24px;stroke:#818cf8}
+.nl{display:flex;align-items:center;gap:28px;color:#cbd5e1;font-size:.93rem;font-weight:500}
+.nl a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:8px;font-weight:600;font-size:.95rem;transition:background .2s,transform .2s,border-color .2s}
+.bp{background:var(--acc);color:#fff}.bp:hover{background:#4338ca;transform:translateY(-1px)}
+.bs{border:1px solid #ffffff33;color:#fff}.bs:hover{border-color:#fff}
+.hero{background:radial-gradient(900px 420px at 78% 0,#312e8155,transparent),var(--navy);color:#fff;padding:88px 0 96px}
+.hg{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.1;font-weight:700;letter-spacing:-.025em}
+.hs{color:#94a3b8;font-size:1.12rem;margin:20px 0 32px;max-width:520px}
+.ca{display:flex;gap:12px;flex-wrap:wrap}
+.ml{display:inline-block;margin-top:18px;color:#94a3b8;font-size:.92rem}.ml:hover{color:#fff}
+.cc{background:#fff;color:var(--ink);border-radius:14px;box-shadow:0 30px 70px #0008;overflow:hidden}
+.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);font-weight:600;font-size:.92rem}
+.ch i{width:9px;height:9px;border-radius:50%;background:#22c55e}
+.cb{padding:20px;min-height:290px;display:flex;flex-direction:column;gap:14px;background:var(--bg)}
+.bb{max-width:90%;padding:11px 15px;border-radius:12px;font-size:.93rem;line-height:1.5}
+.bu{align-self:flex-end;background:#e0e7ff;color:#1e1b4b;border-bottom-right-radius:4px}
+.bv{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.bv small{display:block;color:var(--acc);font-weight:600;font-size:.76rem;margin-bottom:2px}
+.cur:after{content:"";display:inline-block;width:2px;height:1em;background:var(--acc);margin-left:2px;vertical-align:-2px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+section{padding:88px 0}
+.alt{background:var(--bg);border-block:1px solid var(--line)}
+.sh{max-width:640px;margin-bottom:48px}
+h2{font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.15;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.sl{color:var(--mut);font-size:1.05rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cd{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;transition:border-color .2s,box-shadow .2s}
+.cd:hover{border-color:#c7d2fe;box-shadow:0 8px 24px #4f46e514}
+.ic{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:#eef2ff;margin-bottom:16px}
+.ic svg{width:20px;height:20px;stroke:var(--acc)}
+.cd h3{font-size:1.02rem;font-weight:600;margin-bottom:6px}
+.cd p,.cd span{color:var(--mut);font-size:.94rem}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.ck{list-style:none;margin-top:26px;display:grid;gap:14px}
+.ck li{display:flex;gap:12px;color:#334155}
+.ck svg{flex:none;width:20px;height:20px;stroke:#16a34a;margin-top:3px}
+.st{position:relative;padding-left:40px;display:grid;gap:28px}
+.st:before,.st:after{content:"";position:absolute;left:11px;top:8px;width:2px}
+.st:before{bottom:8px;background:var(--line)}
+.st:after{height:0;background:var(--acc);transition:height 2.6s cubic-bezier(.3,.7,.2,1)}
+.st.go:after{height:calc(100% - 16px)}
+.sp{position:relative}
+.sp:before{content:"";position:absolute;left:-40px;top:1px;width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid var(--line);transition:border-color .4s,background .4s}
+.st.go .sp:before{border-color:var(--acc);background:var(--acc)}
+.sp b{display:block;font-weight:600}
+.sp span{color:var(--mut);font-size:.92rem}
+.nt{margin-top:22px;color:var(--mut);font-size:.9rem}
+.tb{display:inline-flex;background:#e2e8f0;border-radius:10px;padding:4px;margin-bottom:8px}
+.tb button{border:0;background:none;padding:9px 24px;border-radius:7px;font:600 .93rem Inter,sans-serif;color:var(--mut);cursor:pointer;transition:.2s}
+.tb button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #0002}
+.cg{animation:fi .35s}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}}
+.cg h3{font-size:.95rem;font-weight:600;margin:26px 0 10px}
+.cl{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.r{display:grid;grid-template-columns:minmax(200px,1fr) 2fr;gap:16px;padding:13px 20px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s;font-size:.93rem}
+.r:last-child{border:0}.r:hover{background:#f1f5f9}
+.r code{font:500 .88rem "JetBrains Mono",monospace;color:var(--acc)}
+.r span{color:var(--mut)}
+.sg{counter-reset:s}
+.sg .cd:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--acc);color:#fff;font-weight:600;font-size:.9rem;margin-bottom:16px}
+.fq{max-width:760px}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--mut);font-size:1.3rem;line-height:1;transition:transform .2s}
+details[open] summary:after{transform:rotate(45deg)}
+details p{color:var(--mut);margin-top:10px}
+footer{background:var(--navy);color:#94a3b8;padding:36px 0;font-size:.9rem}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.t{position:fixed;left:50%;bottom:28px;transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none}
+.t.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:860px){
+.hg,.mg{grid-template-columns:1fr;gap:40px}.g3{grid-template-columns:1fr}
+.nl a:not(.btn){display:none}.hero{padding:56px 0 64px}section{padding:64px 0}
+.r{grid-template-columns:1fr;gap:2px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg style="display:none" aria-hidden="true">
+<symbol id="chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="term" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+<symbol id="mem" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol>
+<symbol id="book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+<symbol id="doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8"/></symbol>
+<symbol id="warn" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM20 8v6M23 11h-6"/></symbol>
+<symbol id="zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+<symbol id="bar" viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></symbol>
+<symbol id="pause" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM10 15V9M14 15V9"/></symbol>
+<symbol id="mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></symbol>
+<symbol id="ok" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+</svg>
+
+<nav><div class="w">
+<a class="lg" href="#"><svg><use href="#shield"/></svg>Vedansh Bot</a>
+<div class="nl"><a href="#features">Features</a><a href="#moderation">Moderation</a><a href="#commands">Commands</a><a href="#faq">FAQ</a>
+<a class="btn bp" href="https://discord.com/oauth2/authorize?client_id=1568087542828367963&amp;permissions=8866461766385655&amp;integration_type=0&amp;scope=bot" target="_blank" rel="noopener">Add to Discord</a></div>
+</div></nav>
+
+<header class="hero"><div class="w hg">
+<div>
+<h1>The AI assistant and moderator for Discord and Telegram</h1>
+<p class="hs">Answers questions, helps you learn ethical hacking, and keeps your community clean with automatic timeouts. It never bans anyone on its own.</p>
+<div class="ca">
+<a class="btn bp" href="https://discord.com/oauth2/authorize?client_id=1568087542828367963&amp;permissions=8866461766385655&amp;integration_type=0&amp;scope=bot" target="_blank" rel="noopener">Add to Discord</a>
+<a class="btn bs" href="https://t.me/Vedansh182_bot" target="_blank" rel="noopener">Open on Telegram</a>
+</div>
+<a class="ml" href="https://t.me/Vedansh182_bot?startgroup=true" target="_blank" rel="noopener">Add to a Telegram group</a>
+</div>
+<div class="cc" aria-label="Example conversation">
+<div class="ch"><i></i>#general</div>
+<div class="cb" id="cb"></div>
+</div>
+</div></header>
+
+<section id="features"><div class="w">
+<div class="sh"><h2>Everything your community needs</h2><p class="sl">One assistant, the same features on Discord and Telegram.</p></div>
+<div class="g3">
+<div class="cd"><div class="ic"><svg><use href="#chat"/></svg></div><h3>AI chat</h3><p>Replies to any question in English, Hindi or Hinglish, with no command needed.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#term"/></svg></div><h3>Ethical hacking help</h3><p>Kali Linux, CTF and bug bounty guidance, strictly for legal and authorized testing.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#mem"/></svg></div><h3>Conversation memory</h3><p>Remembers each member's earlier messages so conversations pick up where they left off.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#book"/></svg></div><h3>Owner-taught knowledge</h3><p>The owner can teach the bot facts, such as server rules or course details.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#shield"/></svg></div><h3>Automatic moderation</h3><p>Detects links, abuse, roasting, self-promotion and spam, then deletes the message and warns.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#doc"/></svg></div><h3>Reasons included</h3><p>Every action comes with a clear reason that the bot writes automatically.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#warn"/></svg></div><h3>Warnings and mod log</h3><p>Keeps a record for each member and posts every action to a private log channel.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#user"/></svg></div><h3>Welcome and rules</h3><p>Greets new members and shows the rules. The owner can edit both at any time.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#zap"/></svg></div><h3>Custom commands</h3><p>Create your own commands with fixed replies. They use no AI quota.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#bar"/></svg></div><h3>Stats and AI limits</h3><p>Daily activity stats and a per-member daily limit on AI questions.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#pause"/></svg></div><h3>Pause mode</h3><p>Pause AI replies while moderation keeps running.</p></div>
+<div class="cd"><div class="ic"><svg><use href="#mic"/></svg></div><h3>Voice (beta)</h3><p>Joins a Discord voice channel and speaks replies with text-to-speech.</p></div>
+</div></div></section>
+
+<section id="moderation" class="alt"><div class="w mg">
+<div>
+<h2>Fair, escalating timeouts</h2>
+<p class="sl">Moderation that corrects behavior without removing anyone. The bot only times members out (muted on Telegram) and never bans on its own.</p>
+<ul class="ck">
+<li><svg><use href="#ok"/></svg>Detects links, abuse, roasting, self-promotion and spam</li>
+<li><svg><use href="#ok"/></svg>Writes a clear reason for every action</li>
+<li><svg><use href="#ok"/></svg>Logs each action to a private mod log</li>
+<li><svg><use href="#ok"/></svg>Kick and ban stay manual and owner-only</li>
+<li><svg><use href="#ok"/></svg>Skips the owner and, on Telegram, group admins</li>
+</ul>
+</div>
+<div>
+<div class="st" id="st">
+<div class="sp"><b>1st warning</b><span>10 minute timeout</span></div>
+<div class="sp"><b>2nd warning</b><span>1 hour timeout</span></div>
+<div class="sp"><b>3rd warning</b><span>6 hour timeout</span></div>
+<div class="sp"><b>4th warning</b><span>1 day timeout</span></div>
+<div class="sp"><b>5th warning</b><span>7 day timeout</span></div>
+<div class="sp"><b>6th warning and beyond</b><span>28 day timeout (maximum)</span></div>
+</div>
+<p class="nt">Warnings count for 30 days.</p>
+</div>
+</div></section>
+
+<section id="commands"><div class="w">
+<div class="sh"><h2>Commands</h2><p class="sl">Click a command to copy it. Owner commands can only be run by the bot owner.</p></div>
+<div class="tb" role="tablist"><button role="tab" data-k="d" aria-selected="true">Discord</button><button role="tab" data-k="t" aria-selected="false">Telegram</button></div>
+<div id="cl"></div>
+</div></section>
+
+<section class="alt"><div class="w">
+<div class="sh"><h2>Get started in two minutes</h2></div>
+<div class="g3 sg">
+<div class="cd"><h3>Add the bot</h3><p>Choose Add to Discord and pick your server. You need the Manage Server permission.</p></div>
+<div class="cd"><h3>Raise the bot's role</h3><p>In Server Settings, open Roles and place the bot's role above your members' roles so timeouts work.</p></div>
+<div class="cd"><h3>Start chatting</h3><p>Write in any channel and the bot replies. Moderation runs automatically.</p></div>
+</div></div></section>
+
+<section id="faq"><div class="w">
+<div class="sh"><h2>Frequently asked questions</h2></div>
+<div class="fq">
+<details><summary>Does the bot ban members?</summary><p>No. Automatic actions are timeouts only (mutes on Telegram). Kick and ban are manual commands that only the owner can run.</p></details>
+<details><summary>Who can run admin commands?</summary><p>Moderation and settings commands are limited to the bot owner. Automatic moderation works in every server where the bot is added.</p></details>
+<details><summary>What data does the bot keep?</summary><p>It keeps short per-member conversation summaries and moderation records so it can remember context and track warnings. Members can erase their own memory with !forget on Discord or /forget on Telegram.</p></details>
+<details><summary>Is it free to use?</summary><p>Adding the bot is free. AI replies depend on the available daily quota, so they may pause when the limit is reached.</p></details>
+</div></div></section>
+
+<section id="community" class="alt"><div class="w">
+<div class="sh"><h2>Join the community</h2><p class="sl">Ask questions, suggest features, or follow along.</p></div>
+<div class="g3">
+<a class="cd" href="https://discord.gg/knwjCKQQZ" target="_blank" rel="noopener"><h3>Discord server</h3><span>Chat with the community and try the bot.</span></a>
+<a class="cd" href="https://t.me/+Xsd5_xZxUz0wZjRl" target="_blank" rel="noopener"><h3>Telegram group</h3><span>Updates and discussion.</span></a>
+<a class="cd" href="https://youtube.com/@vedanshsrivastava182?si=Fco1LGI_T3GeXEFZ" target="_blank" rel="noopener"><h3>YouTube channel</h3><span>Videos and tutorials by Vedansh Srivastava.</span></a>
+</div></div></section>
+
+<footer><div class="w"><span>© 2026 Vedansh Bot. Built by Vedansh Srivastava.</span><span>Hacking guidance is for legal and authorized testing only.</span></div></footer>
+<div class="t" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s),sl=ms=>new Promise(r=>setTimeout(r,ms));
+const C={
+d:[["Everyone",[["!ask question","Ask the AI anything"],["!forget","Erase your chat memory"],["!rules","Show the server rules"],["!cmds","List custom commands"]]],
+["Owner: members",[["!kick @user","Remove from the server"],["!ban @user","Ban a member"],["!timeout @user 30","Time out for 30 minutes"],["!untimeout @user","Remove a timeout"],["!warnings @user","View warnings"],["!clearwarns @user","Clear warnings"],["!ignore @user","Stop AI replies to a member"],["!addrole @user @role","Give a role"],["!nick @user name","Change a nickname"]]],
+["Owner: server",[["!setlog","Send the mod log to this channel"],["!setwelcome text","Set the welcome message"],["!setrules text","Set the rules"],["!addcmd name text","Create a custom command"],["!stats","View activity stats"],["!ailimit 20","Set the daily AI limit"],["!pause 7","Pause AI for 7 days"],["!resume","Resume AI replies"],["!teach fact","Teach the bot a fact"],["!purge 20","Delete 20 messages"],["!slowmode 10","Set slowmode"],["!lock","Lock the channel (!unlock to reopen)"]]],
+["Owner: voice (beta)",[["!join","Bring the bot into voice"],["!say text","Speak text in voice"],["!vmute @user","Mute in voice"],["!move @user #vc","Move to another voice channel"]]]],
+t:[["Everyone",[["/ask question","Ask the AI anything"],["/forget","Erase your chat memory"],["/id","Show your user ID"],["/rules","Show the group rules"],["/cmds","List custom commands"],["/help","Show help"]]],
+["Owner: members (reply to a message)",[["/kick","Remove from the group"],["/ban","Ban a member"],["/unban","Lift a ban"],["/mute 30","Mute for 30 minutes"],["/unmute","Unmute"],["/warnings","View warnings"],["/clearwarns","Clear warnings"],["/ignore","Stop AI replies to a member"]]],
+["Owner: group",[["/setlog","Send the mod log to this chat"],["/setwelcome text","Set the welcome message"],["/setrules text","Set the rules"],["/addcmd name text","Create a custom command"],["/stats","View activity stats"],["/ailimit 20","Set the daily AI limit"],["/pause 7","Pause AI for 7 days"],["/resume","Resume AI replies"],["/teach fact","Teach the bot a fact"]]]]};
+function show(k){
+document.querySelectorAll(".tb button").forEach(b=>b.setAttribute("aria-selected",b.dataset.k==k));
+$("#cl").innerHTML=C[k].map(([h,l])=>`<div class="cg"><h3>${h}</h3><div class="cl">${l.map(([c,d])=>`<div class="r" tabindex="0" data-c="${c.split(" ")[0]}"><code>${c}</code><span>${d}</span></div>`).join("")}</div></div>`).join("")}
+document.querySelectorAll(".tb button").forEach(b=>b.onclick=()=>show(b.dataset.k));
+$("#cl").addEventListener("click",e=>{const r=e.target.closest(".r");if(!r)return;
+navigator.clipboard?.writeText(r.dataset.c);const t=$(".t");t.textContent="Copied "+r.dataset.c;
+t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1400)});
+$("#cl").addEventListener("keydown",e=>{if(e.key=="Enter")e.target.click()});
+show("d");
+
+const T=[["What does nmap do?","nmap is a network scanner. Use it on your own lab or authorized targets to find open ports and services."],
+["you're such a noob lol","Timeout: 10 minutes. Reason: roasted another member. (Warning #1)"],
+["I want to learn hacking","Vedansh is working on a full course for that. It is a paid course."]];
+function add(b,c,n){const d=document.createElement("div");d.className="bb "+c;d.innerHTML=(n?`<small>${n}</small>`:"")+`<span class="cur"></span>`;b.append(d);return d.querySelector("span")}
+async function type(p,s,ms){for(const ch of s){p.textContent+=ch;await sl(ms)}p.classList.remove("cur")}
+async function chat(){const b=$("#cb");let i=0;
+for(;;){const[q,a]=T[i++%T.length];b.innerHTML="";
+await type(add(b,"bu"),q,36);await sl(450);
+await type(add(b,"bv","Vedansh Bot"),a,18);await sl(2800)}}
+if(matchMedia("(prefers-reduced-motion:reduce)").matches){
+const[q,a]=T[1],b=$("#cb");add(b,"bu").textContent=q;add(b,"bv","Vedansh Bot").textContent=a;
+b.querySelectorAll(".cur").forEach(p=>p.classList.remove("cur"))}else chat();
+
+const S=$("#st");S.querySelectorAll(".sp").forEach((e,i)=>e.style.setProperty("--d",i*.42+"s"));
+const st=document.createElement("style");st.textContent=".sp:before{transition-delay:var(--d)!important}";document.head.append(st);
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){S.classList.add("go");o.disconnect()}}),{threshold:.5}).observe(S);
+</script>
+</body>
+</html>
